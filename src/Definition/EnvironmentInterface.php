@@ -4,5 +4,7 @@ namespace AlanVdb\Server\Definition;
 
 interface EnvironmentInterface
 {
-    public function getVar(string $var, mixed $default = null) : mixed;
+    public function get(string $var) : mixed;
+
+    public function has(string $var) : bool;
 }

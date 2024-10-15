@@ -31,7 +31,7 @@ class Environment implements EnvironmentInterface
         }
     }
 
-    public function getVar(string $var, mixed $default = null) : mixed
+    public function get(string $var, mixed $default = null) : mixed
     {
         if (array_key_exists($var, $_ENV)) {
             return $_ENV[$var];
@@ -39,5 +39,10 @@ class Environment implements EnvironmentInterface
             return $this->root;
         }
         return $default;
+    }
+
+    public function has(string $var) : bool
+    {
+        return array_key_exists($var, $_ENV) || $var === 'ROOT';
     }
 }

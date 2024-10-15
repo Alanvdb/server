@@ -31,14 +31,14 @@ class Environment implements EnvironmentInterface
         }
     }
 
-    public function get(string $var, mixed $default = null) : mixed
+    public function get(string $var) : mixed
     {
         if (array_key_exists($var, $_ENV)) {
             return $_ENV[$var];
         } elseif ($var === 'ROOT') {
             return $this->root;
         }
-        return $default;
+        throw new ServerRuntimeException("Environment variable not found: '$var'.");
     }
 
     public function has(string $var) : bool

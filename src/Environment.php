@@ -19,11 +19,10 @@ class Environment implements EnvironmentInterface
 
     public function __construct(string $rootDirectory)
     {
-        $this->root = realpath($rootDirectory);
-
-        if ($this->root === false) {
+        if (!is_dir($rootDirectory)) {
             throw new InvalidServerParamProvided("Provided root directory is not valid: '$rootDirectory'.");
         }
+        $this->root = $rootDirectory;
         
         try {
             Dotenv::createImmutable($this->root)->load();
